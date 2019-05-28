@@ -514,6 +514,7 @@ static void gap_params_init(void)
 
 /**@brief GATT module event handler.
  */
+/*
 static void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)
 {
     if (p_evt->evt_id == NRF_BLE_GATT_EVT_ATT_MTU_UPDATED)
@@ -525,13 +526,13 @@ static void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const *
 
     ble_hrs_on_gatt_evt(&m_hrs, p_evt);
 }
-
+*/
 
 /**@brief Function for initializing the GATT module.
  */
 static void gatt_init(void)
 {
-    ret_code_t err_code = nrf_ble_gatt_init(&m_gatt, gatt_evt_handler);
+    ret_code_t err_code = nrf_ble_gatt_init(&m_gatt, NULL);
     APP_ERROR_CHECK(err_code);
 }
 
@@ -841,6 +842,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
 
         default:
+        NRF_LOG_DEBUG("default..............\n" );
             // No implementation needed.
             break;
     }
@@ -983,7 +985,7 @@ static void advertising_init(void)
  */
 static void buttons_leds_init(bool * p_erase_bonds)
 {
-    ret_code_t err_code;
+  /*  ret_code_t err_code;
     bsp_event_t startup_event;
 
     err_code = bsp_init(BSP_INIT_LED | BSP_INIT_BUTTONS, bsp_event_handler);
@@ -993,6 +995,9 @@ static void buttons_leds_init(bool * p_erase_bonds)
     APP_ERROR_CHECK(err_code);
 
     *p_erase_bonds = (startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
+*/
+
+    *p_erase_bonds = false;//(startup_event == BSP_EVENT_CLEAR_BONDING_DATA);
 }
 
 
